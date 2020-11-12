@@ -8,8 +8,8 @@ x-examples:
     location:
       type: url
       parameters:
-        - key: url
-          value: 'https://example.com/iris.csv'
+        - key: string
+          value: string
     tags:
       - multivariate
     format: csv
