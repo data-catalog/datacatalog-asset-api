@@ -163,6 +163,53 @@ paths:
         description: Specify only the attributes which you want to update.
       tags:
         - Asset
+  '/assets/{assetId}/tags':
+    parameters:
+      - schema:
+          type: string
+        name: assetId
+        in: path
+        required: true
+        description: The unique identifier of the asset.
+    post:
+      summary: ''
+      operationId: addTag
+      responses:
+        '204':
+          description: The tag was successfully added to the asset.
+      tags:
+        - Asset
+      description: Adds a single tag to the asset.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              description: The name of the tag to add.
+        description: The name of the tag to add.
+  '/assets/{asssetId}/tags/{tag}':
+    parameters:
+      - schema:
+          type: string
+        name: asssetId
+        in: path
+        required: true
+        description: The unique identifier of the asset.
+      - schema:
+          type: string
+        name: tag
+        in: path
+        required: true
+        description: The tag to remove.
+    delete:
+      summary: ''
+      operationId: deleteTag
+      responses:
+        '204':
+          description: The tag was successfully deleted from the asset.
+      description: Delete the specified tag from the asset.
+      tags:
+        - Asset
 components:
   securitySchemes:
     JWT:
