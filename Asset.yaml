@@ -71,7 +71,12 @@ paths:
         '201':
           description: Created
         '422':
-          description: Bad Request
+          description: Unprocessable Entity
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: ./definitions/ErrorResponse.yaml
       description: Create a data asset.
       requestBody:
         content:
@@ -130,7 +135,7 @@ paths:
                     size: 25 MB
                     namespace: flowerproject
         '404':
-          description: Created
+          description: Not Found
       operationId: getAsset
       tags:
         - Asset
@@ -142,7 +147,7 @@ paths:
         '204':
           description: Asset was deleted successfully.
         '404':
-          description: Asset not found.
+          description: Not Found
       description: Delete asset.
       tags:
         - Asset
@@ -151,9 +156,15 @@ paths:
       operationId: patchAsset
       responses:
         '204':
-          description: OK
+          description: Changes were made successfully.
+        '404':
+          description: Not Found
         '422':
-          description: Created
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: ./definitions/ErrorResponse.yaml
       description: Update only the given attributes of the asset. The attributes which are not specified in the body will not change.
       requestBody:
         content:
@@ -181,6 +192,10 @@ paths:
       responses:
         '204':
           description: The tag was successfully added to the asset.
+        '404':
+          description: The asset was not found.
+        '422':
+          description: Unprocessable Entity
       tags:
         - Asset
       description: Adds a single tag to the asset.
@@ -211,6 +226,8 @@ paths:
       responses:
         '204':
           description: The tag was successfully deleted from the asset.
+        '404':
+          description: The asset was not found.
       description: Delete the specified tag from the asset.
       tags:
         - Asset
