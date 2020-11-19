@@ -40,7 +40,9 @@ paths:
                       size: string
                       namespace: flowerproject
       operationId: getAssets
-      description: List all the data assets.
+      description: |-
+        List all the data assets.
+        `tags` and `namespace` query params are deprecated, please use the `/assets/search` endpoint instead.
       parameters:
         - schema:
             type: array
@@ -54,12 +56,14 @@ paths:
           description: Filter by tags.
           name: tags
           style: form
+          deprecated: true
         - schema:
             type: string
             example: flowerproject
           in: query
           name: namespace
           description: Filter by namespace.
+          deprecated: true
     post:
       summary: ''
       operationId: createAsset
@@ -210,6 +214,50 @@ paths:
       description: Delete the specified tag from the asset.
       tags:
         - Asset
+  '/assets/search/{keyword}':
+    parameters:
+      - schema:
+          type: string
+        name: keyword
+        in: path
+        required: true
+        description: The keyword to search by. It searches in the name of the asset.
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Asset
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./definitions/AssetResponse.yaml
+              examples: {}
+      operationId: searchAssets
+      description: |
+        List the assets which match the given keyword and optional query parameters.
+      parameters:
+        - schema:
+            type: array
+            items:
+              type: string
+            uniqueItems: true
+            example:
+              - multivariate
+              - real
+          in: query
+          description: Filter by tags.
+          name: tags
+          style: form
+        - schema:
+            type: string
+            example: flowerproject
+          in: query
+          name: namespace
+          description: Filter by namespace.
 components:
   securitySchemes:
     JWT:
