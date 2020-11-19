@@ -194,8 +194,6 @@ paths:
           description: The tag was successfully added to the asset.
         '404':
           description: The asset was not found.
-        '422':
-          description: Unprocessable Entity
       tags:
         - Asset
       description: Adds a single tag to the asset.
@@ -205,6 +203,7 @@ paths:
             schema:
               type: string
               description: The name of the tag to add.
+              minLength: 1
         description: The name of the tag to add.
   '/assets/{asssetId}/tags/{tag}':
     parameters:
@@ -216,6 +215,7 @@ paths:
         description: The unique identifier of the asset.
       - schema:
           type: string
+          minLength: 1
         name: tag
         in: path
         required: true
