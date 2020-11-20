@@ -37,7 +37,7 @@ paths:
                       tags:
                         - multivariate
                       fomat: csv
-                      size: string
+                      size: 25 MB
                       namespace: flowerproject
       operationId: getAssets
       description: |-
@@ -94,7 +94,7 @@ paths:
                   tags:
                     - multivariate
                   fomat: csv
-                  size: string
+                  size: 25 MB
                   namespace: flowerproject
         description: The data asset to be created.
       tags:
@@ -178,57 +178,41 @@ paths:
         description: Specify only the attributes which you want to update.
       tags:
         - Asset
-  '/assets/{assetId}/tags':
+  '/assets/{assetId}/tags/{tag}':
     parameters:
-      - schema:
-          type: string
-        name: assetId
-        in: path
-        required: true
-        description: The unique identifier of the asset.
-    post:
-      summary: ''
-      operationId: addTag
-      responses:
-        '204':
-          description: The tag was successfully added to the asset.
-        '404':
-          description: The asset was not found.
-      tags:
-        - Asset
-      description: Adds a single tag to the asset.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-              description: The name of the tag to add.
-              minLength: 1
-        description: The name of the tag to add.
-  '/assets/{asssetId}/tags/{tag}':
-    parameters:
-      - schema:
-          type: string
-        name: asssetId
-        in: path
-        required: true
-        description: The unique identifier of the asset.
       - schema:
           type: string
           minLength: 1
         name: tag
         in: path
         required: true
-        description: The tag to remove.
+        description: The name of the tag.
+      - schema:
+          type: string
+        name: assetId
+        in: path
+        required: true
+        description: The unique identifier of the asset.
     delete:
       summary: ''
       operationId: deleteTag
       responses:
         '204':
-          description: The tag was successfully deleted from the asset.
+          description: No Content
         '404':
-          description: The asset was not found.
+          description: Not Found
       description: Delete the specified tag from the asset.
+      tags:
+        - Asset
+    post:
+      summary: ''
+      operationId: addTag
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+      description: The name of the tag to add.
       tags:
         - Asset
   '/assets/search/{keyword}':

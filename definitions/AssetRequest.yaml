@@ -39,6 +39,7 @@ properties:
     enum:
       - csv
       - json
+      - container
     description: |
       The file format of the asset.
   size:
