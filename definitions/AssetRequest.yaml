@@ -2,7 +2,7 @@ title: AssetRequest
 type: object
 description: The model of a data asset which is sent from the client to the server.
 x-examples:
-  example-1:
+  example-2:
     name: Iris Dataset
     description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
     location:
@@ -13,7 +13,6 @@ x-examples:
     tags:
       - multivariate
     format: csv
-    size: string
     namespace: flowerproject
 properties:
   name:
@@ -39,12 +38,8 @@ properties:
     enum:
       - csv
       - json
-      - container
     description: |
       The file format of the asset.
-  size:
-    type: string
-    description: The approximate size of the asset.
   namespace:
     type: string
     example: flowerproject

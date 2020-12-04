@@ -16,4 +16,19 @@ allOf:
         description: Date of the last update.
   - $ref: ./AssetRequest.yaml
 description: The model of a data asset which is sent from the server to the client.
-x-examples: {}
+x-examples:
+  example-1:
+    id: string
+    createdAt: '2019-08-24T14:15:22Z'
+    updatedAt: '2019-08-24T14:15:22Z'
+    name: Iris Dataset
+    description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
+    location:
+      type: url
+      parameters:
+        - key: string
+          value: string
+    tags:
+      - multivariate
+    format: csv
+    namespace: flowerproject
