@@ -259,6 +259,11 @@ paths:
           in: query
           name: namespace
           description: Filter by namespace.
+        - schema:
+            type: string
+          in: query
+          name: owner
+          description: Filter by owner.
 components:
   securitySchemes:
     JWT:
