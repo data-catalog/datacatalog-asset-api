@@ -44,3 +44,8 @@ properties:
     type: string
     example: flowerproject
     description: 'The namespace of the asset. An asset has one namespace, which can be used to group assets together (eg. by projects).'
+  shortDescription:
+    type: string
+    example: This is perhaps the best known database to be found in the pattern recognition literature.
+    maxLength: 300
+    description: Short description breifly definig an Asset.
