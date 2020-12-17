@@ -11,7 +11,7 @@ servers:
 paths:
   /assets:
     get:
-      summary: Your GET endpoint
+      summary: Get all assets
       tags:
         - Asset
       responses:
@@ -65,7 +65,7 @@ paths:
           description: Filter by namespace.
           deprecated: true
     post:
-      summary: ''
+      summary: Create an asset
       operationId: createAsset
       responses:
         '201':
@@ -110,7 +110,7 @@ paths:
           The unique identifier of the asset.
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get asset by ID
       responses:
         '200':
           description: OK
@@ -141,7 +141,7 @@ paths:
         - Asset
       description: Get asset by ID.
     delete:
-      summary: ''
+      summary: Delete asset by ID
       operationId: deleteAsset
       responses:
         '204':
@@ -152,7 +152,7 @@ paths:
       tags:
         - Asset
     patch:
-      summary: ''
+      summary: Update asset by ID
       operationId: patchAsset
       responses:
         '204':
@@ -194,7 +194,7 @@ paths:
         required: true
         description: The unique identifier of the asset.
     delete:
-      summary: ''
+      summary: Delete tag from asset
       operationId: deleteTag
       responses:
         '204':
@@ -205,7 +205,7 @@ paths:
       tags:
         - Asset
     post:
-      summary: ''
+      summary: Add tag to asset
       operationId: addTag
       responses:
         '204':
@@ -224,7 +224,7 @@ paths:
         required: true
         description: The keyword to search by. It searches in the name of the asset.
     get:
-      summary: Your GET endpoint
+      summary: Search assets
       tags:
         - Asset
       responses:
@@ -264,6 +264,47 @@ paths:
           in: query
           name: owner
           description: Filter by owner.
+  /assets/favorites:
+    get:
+      summary: List favorite assets
+      tags:
+        - Asset
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./definitions/AssetResponse.yaml
+      operationId: getFavoriteAssets
+      description: Lists the favorite assets of the currently logged in user.
+      security:
+        - JWT: []
+  '/assets/favorites/{assetId}':
+    parameters:
+      - schema:
+          type: string
+        name: assetId
+        in: path
+        required: true
+        description: The id of the asset to add to the favorites.
+    post:
+      summary: Add asset to favorites
+      operationId: addFavoriteAsset
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+      description: |-
+        Adds the asset to the currently logged in user's favorites.
+        Responds with `404` if the asset is not found.
+      security:
+        - JWT: []
+      tags:
+        - Asset
 components:
   securitySchemes:
     JWT:
