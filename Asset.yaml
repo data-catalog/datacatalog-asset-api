@@ -26,18 +26,19 @@ paths:
               examples:
                 example-1:
                   value:
-                    - id: '0'
+                    - id: string
                       createdAt: '2019-08-24T14:15:22Z'
                       updatedAt: '2019-08-24T14:15:22Z'
+                      ownerId: string
                       name: Iris Dataset
                       description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
+                      shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
                       location:
                         type: url
-                        url: 'http://example.com'
-                      tags:
-                        - multivariate
-                      fomat: csv
-                      size: 25 MB
+                        parameters:
+                          - key: permissions
+                            value: read$list
+                      format: csv
                       namespace: flowerproject
       operationId: getAssets
       description: |-
@@ -82,19 +83,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./definitions/AssetRequest.yaml
+              $ref: ./definitions/AssetCreationRequest.yaml
             examples:
               example-1:
                 value:
                   name: Iris Dataset
                   description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
+                  shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
                   location:
                     type: url
-                    url: 'http://example.com'
+                    parameters:
+                      - key: permissions
+                        value: read$list
                   tags:
                     - multivariate
-                  fomat: csv
-                  size: 25 MB
+                  format: csv
                   namespace: flowerproject
         description: The data asset to be created.
       tags:
@@ -121,18 +124,19 @@ paths:
               examples:
                 example-1:
                   value:
-                    id: '0'
+                    id: string
                     createdAt: '2019-08-24T14:15:22Z'
                     updatedAt: '2019-08-24T14:15:22Z'
+                    ownerId: string
                     name: Iris Dataset
                     description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
+                    shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
                     location:
                       type: url
-                      url: 'http://example.com'
-                    tags:
-                      - multivariate
-                    fomat: csv
-                    size: 25 MB
+                      parameters:
+                        - key: permissions
+                          value: read$list
+                    format: csv
                     namespace: flowerproject
         '404':
           description: Not Found
@@ -170,7 +174,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./definitions/AssetRequest.yaml
+              $ref: ./definitions/AssetUpdateRequest.yaml
             examples:
               example-1:
                 value:
