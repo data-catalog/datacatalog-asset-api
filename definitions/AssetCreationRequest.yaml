@@ -41,7 +41,6 @@ properties:
     items:
       type: string
       example: multivariate
-    default: []
   format:
     type: string
     example: csv
