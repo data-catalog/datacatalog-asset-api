@@ -102,6 +102,8 @@ paths:
         description: The data asset to be created.
       tags:
         - Asset
+      security:
+        - JWT: []
     parameters: []
   '/assets/{assetId}':
     parameters:
@@ -155,6 +157,8 @@ paths:
       description: Delete asset.
       tags:
         - Asset
+      security:
+        - JWT: []
     patch:
       summary: Update asset by ID
       operationId: patchAsset
@@ -182,6 +186,8 @@ paths:
         description: Specify only the attributes which you want to update.
       tags:
         - Asset
+      security:
+        - JWT: []
   '/assets/{assetId}/tags/{tag}':
     parameters:
       - schema:
@@ -208,6 +214,8 @@ paths:
       description: Delete the specified tag from the asset.
       tags:
         - Asset
+      security:
+        - JWT: []
     post:
       summary: Add tag to asset
       operationId: addTag
@@ -219,6 +227,8 @@ paths:
       description: The name of the tag to add.
       tags:
         - Asset
+      security:
+        - JWT: []
   '/assets/search/{keyword}':
     parameters:
       - schema:
