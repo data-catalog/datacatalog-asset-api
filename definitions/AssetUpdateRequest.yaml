@@ -1,11 +1,8 @@
-title: AssetResponse
-description: The model of a data asset which is sent from the server to the client.
+title: AssetUpdateRequest
+type: object
+description: The model of a data asset which is sent from the client to the server when updating.
 x-examples:
   example-1:
-    id: string
-    createdAt: '2019-08-24T14:15:22Z'
-    updatedAt: '2019-08-24T14:15:22Z'
-    ownerId: string
     name: Iris Dataset
     description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
     shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
@@ -14,41 +11,28 @@ x-examples:
       parameters:
         - key: string
           value: string
+    tags:
+      - multivariate
     format: csv
     namespace: flowerproject
-type: object
 properties:
-  id:
-    format: int64
-    description: Unique identifier of the asset.
-    type: string
-  createdAt:
-    type: string
-    description: Date of creation.
-    format: date-time
-  updatedAt:
-    type: string
-    format: date-time
-    description: Date of the last update.
-  ownerId:
-    type: string
-    description: The id of the user who owns the Asset.
   name:
     type: string
     example: Iris Dataset
     description: A short name of the data asset.
-    minLength: 3
-    maxLength: 120
+    maxLength: 256
+    minLength: 1
   description:
     type: string
     example: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
     description: A longer description about the content of the data asset.
-    minLength: 3
+    minLength: 1
   shortDescription:
     type: string
     example: This is perhaps the best known database to be found in the pattern recognition literature.
-    maxLength: 300
     description: Short description breifly definig an asset.
+    minLength: 1
+    maxLength: 256
   location:
     $ref: ./Location.yaml
   tags:
@@ -70,3 +54,5 @@ properties:
     type: string
     example: flowerproject
     description: 'The namespace of the asset. An asset has one namespace, which can be used to group assets together (eg. by projects).'
+    minLength: 1
+    maxLength: 256

@@ -1,6 +1,7 @@
 title: Location
 type: object
 description: The location where the asset data can be found.
+x-examples: {}
 properties:
   type:
     type: string
@@ -10,4 +11,5 @@ properties:
     type: array
     items:
       $ref: ./Parameter.yaml
-x-examples: {}
+required:
+  - type
