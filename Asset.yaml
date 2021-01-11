@@ -314,3 +314,5 @@ components:
       description: Authentication is made by the JWT token sent in the Authorizationheader of the request.
 tags:
   - name: Asset
+security:
+  - JWT: []
