@@ -1,4 +1,4 @@
-title: Location
+title: LocationResponse
 type: object
 description: The location where the asset data can be found.
 x-examples: {}
@@ -10,6 +10,4 @@ properties:
   parameters:
     type: array
     items:
-      $ref: ./Parameter.yaml
-required:
-  - type
+      $ref: ./ParameterDto.yaml

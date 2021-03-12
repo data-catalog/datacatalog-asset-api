@@ -50,7 +50,7 @@ properties:
     maxLength: 300
     description: Short description breifly definig an asset.
   location:
-    $ref: ./Location.yaml
+    $ref: ./LocationResponse.yaml
   tags:
     type: array
     uniqueItems: true

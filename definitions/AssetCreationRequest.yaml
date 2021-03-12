@@ -33,7 +33,7 @@ properties:
     maxLength: 512
     description: Short description breifly definig an asset.
   location:
-    $ref: ./Location.yaml
+    $ref: ./LocationCreationRequest.yaml
   tags:
     type: array
     uniqueItems: true
