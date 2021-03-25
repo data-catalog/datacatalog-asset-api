@@ -21,12 +21,10 @@ properties:
     example: Iris Dataset
     description: A short name of the data asset.
     maxLength: 256
-    minLength: 1
   description:
     type: string
     example: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
     description: A longer description about the content of the data asset.
-    minLength: 3
   shortDescription:
     type: string
     example: This is perhaps the best known database to be found in the pattern recognition literature.

@@ -6,14 +6,11 @@ properties:
     type: string
     description: The key of the parameter.
     example: permissions
-    minLength: 1
     maxLength: 256
   value:
     type: string
     description: The value of the parameter
     example: read$list
-    minLength: 1
-    maxLength: 256
 required:
   - key
   - value
