@@ -224,7 +224,7 @@ paths:
           description: No Content
         '404':
           description: Not Found
-      description: The name of the tag to add.
+      description: 'Adds the tag to the given asset. If the tag is already present, it will remain the same, and `200` status will be returned.'
       tags:
         - Asset
       security:

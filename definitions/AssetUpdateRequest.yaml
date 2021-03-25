@@ -31,8 +31,7 @@ properties:
     type: string
     example: This is perhaps the best known database to be found in the pattern recognition literature.
     description: Short description breifly definig an asset.
-    minLength: 1
-    maxLength: 256
+    maxLength: 512
   location:
     $ref: ./LocationUpdateRequest.yaml
   tags:
