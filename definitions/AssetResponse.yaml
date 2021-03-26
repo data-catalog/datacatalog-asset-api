@@ -70,3 +70,6 @@ properties:
     type: string
     example: flowerproject
     description: 'The namespace of the asset. An asset has one namespace, which can be used to group assets together (eg. by projects).'
+  public:
+    type: boolean
+    description: Whether the asset is accessible by anyone or not.
