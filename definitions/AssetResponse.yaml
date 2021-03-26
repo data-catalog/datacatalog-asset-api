@@ -73,3 +73,9 @@ properties:
   public:
     type: boolean
     description: Whether the asset is accessible by anyone or not.
+  members:
+    type: array
+    description: The ID-s of the users which the asset is accessible for.
+    uniqueItems: true
+    items:
+      type: string
