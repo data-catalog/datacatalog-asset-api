@@ -99,6 +99,7 @@ paths:
                     - multivariate
                   format: csv
                   namespace: flowerproject
+                  public: true
         description: The data asset to be created.
       tags:
         - Asset
