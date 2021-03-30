@@ -320,6 +320,21 @@ paths:
         - JWT: []
       tags:
         - Asset
+  /user/assets:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./definitions/AssetResponse.yaml
+      operationId: getUserAssets
+      description: 'Returns a list of assets which is owned by the logged in user, or is a member of the asset.'
 components:
   securitySchemes:
     JWT:
