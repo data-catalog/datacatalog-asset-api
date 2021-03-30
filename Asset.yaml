@@ -323,7 +323,8 @@ paths:
   /user/assets:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - Asset
       responses:
         '200':
           description: OK
