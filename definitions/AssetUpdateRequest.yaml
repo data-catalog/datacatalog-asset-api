@@ -52,7 +52,7 @@ properties:
     example: flowerproject
     description: 'The namespace of the asset. An asset has one namespace, which can be used to group assets together (eg. by projects).'
     maxLength: 256
-  public:
+  isPublic:
     type: boolean
     description: Whether the asset is accessible by anyone or not.
   members:

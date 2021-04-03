@@ -53,7 +53,7 @@ properties:
     description: 'The namespace of the asset. An asset has one namespace, which can be used to group assets together (eg. by projects).'
     maxLength: 256
     default: ''
-  public:
+  isPublic:
     type: boolean
     description: Whether the asset is accessible by anyone or not.
 required:
@@ -61,4 +61,4 @@ required:
   - description
   - location
   - format
-  - public
+  - isPublic
