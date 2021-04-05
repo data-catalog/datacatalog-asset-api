@@ -17,8 +17,8 @@ properties:
     description: The status description of the response.
     example: Bad Request
   message:
-    type: string
-    description: A description of the error.
+    type: object
+    description: 'An object containing the erros, with the field name as key, and the error cause as value.'
   path:
     type: string
     example: /assets
