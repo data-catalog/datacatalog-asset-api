@@ -1,41 +1,41 @@
 title: AssetCreationRequest
 type: object
-description: The model of an asset which is sent from the client to the server when creating data.
+description: ''
 x-examples:
-  example-1:
+  Example request:
     name: Iris Dataset
-    description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
+    description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. <i>(See Duda & Hart, for example.)</i> The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are <strong>NOT</strong> linearly separable from each other.'
     shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
     location:
       type: url
       parameters:
-        - key: string
-          value: string
+        - key: url
+          value: 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
     tags:
       - multivariate
     format: csv
-    namespace: flowerproject
+    isPublic: true
 properties:
   name:
     type: string
     example: Iris Dataset
-    description: A short name of the data asset.
+    description: The name of the data asset.
     maxLength: 256
   description:
     type: string
     example: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
-    description: A longer description about the content of the data asset.
+    description: A longer description about the content of the asset. Supports rich text formatting.
   shortDescription:
     type: string
     example: This is perhaps the best known database to be found in the pattern recognition literature.
     maxLength: 512
-    description: Short description breifly definig an asset.
+    description: Short description breifly defining the contents of the asset.
   location:
     $ref: ./LocationCreationRequest.yaml
   tags:
     type: array
     uniqueItems: true
-    description: Keywords assigned to the asset.
+    description: A list of keywords assigned to the asset.
     items:
       type: string
       example: multivariate
@@ -47,12 +47,6 @@ properties:
       - json
     description: |
       The file format of the asset.
-  namespace:
-    type: string
-    example: flowerproject
-    description: 'The namespace of the asset. An asset has one namespace, which can be used to group assets together (eg. by projects).'
-    maxLength: 256
-    default: ''
   isPublic:
     type: boolean
     description: Whether the asset is accessible by anyone or not.

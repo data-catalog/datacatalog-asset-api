@@ -1,13 +1,16 @@
 openapi: 3.0.0
 info:
-  title: Asset
+  title: Data Catalog Asset Service
   version: '1.0'
-  description: Data Catalog Asset API.
+  description: |-
+    The asset handling service of the Data Catalog application.
+
+    Provides API endpoints to create, delete, and modify assets. It also manages the access rights to the assets, as private assets are only available to users that are members of it.
   contact:
-    name: Kata Sára Cseke
-    email: katacseke@gmail.com
+    name: Tumó Szilárd Zsolt
+    email: szilard.tumo@stud.ubbcluj.ro
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'https://assethandlingservice.azurewebsites.net'
 paths:
   /assets:
     get:
@@ -23,48 +26,14 @@ paths:
                 type: array
                 items:
                   $ref: ./definitions/AssetResponse.yaml
-              examples:
-                example-1:
-                  value:
-                    - id: string
-                      createdAt: '2019-08-24T14:15:22Z'
-                      updatedAt: '2019-08-24T14:15:22Z'
-                      ownerId: string
-                      name: Iris Dataset
-                      description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
-                      shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
-                      location:
-                        type: url
-                        parameters:
-                          - key: permissions
-                            value: read$list
-                      format: csv
-                      namespace: flowerproject
+              examples: {}
       operationId: getAssets
       description: |-
-        List all the data assets.
-        `tags` and `namespace` query params are deprecated, please use the `/assets/search` endpoint instead.
-      parameters:
-        - schema:
-            type: array
-            items:
-              type: string
-            uniqueItems: true
-            example:
-              - multivariate
-              - real
-          in: query
-          description: Filter by tags.
-          name: tags
-          style: form
-          deprecated: true
-        - schema:
-            type: string
-            example: flowerproject
-          in: query
-          name: namespace
-          description: Filter by namespace.
-          deprecated: true
+        Lists all the assets available to the authenticated user:
+
+        - if no authentication is present, only public assets will be returned.
+        - if authentication is provided, public assets, and private assets that the authenticated user has access rights to, will be returned.
+      parameters: []
     post:
       summary: Create an asset
       operationId: createAsset
@@ -78,7 +47,16 @@ paths:
             application/json:
               schema:
                 $ref: ./definitions/ErrorResponse.yaml
-      description: Create a data asset.
+      description: |-
+        Create an asset. The user must be authenticated to be able to create an asset.
+
+        Curently supported source locations are: 
+         - URL
+         - Azure Blob Storage.
+         
+         Currently supported data formats are:
+         - JSON
+         - CSV
       requestBody:
         content:
           application/json:
@@ -100,7 +78,7 @@ paths:
                   format: csv
                   namespace: flowerproject
                   isPublic: true
-        description: The data asset to be created.
+        description: The asset to be created.
       tags:
         - Asset
       security:
@@ -112,8 +90,7 @@ paths:
           type: string
         name: assetId
         in: path
-        description: |
-          The unique identifier of the asset.
+        description: The ID of the asset.
         required: true
     get:
       summary: Get asset by ID
@@ -124,38 +101,30 @@ paths:
             application/json:
               schema:
                 $ref: ./definitions/AssetResponse.yaml
-              examples:
-                example-1:
-                  value:
-                    id: string
-                    createdAt: '2019-08-24T14:15:22Z'
-                    updatedAt: '2019-08-24T14:15:22Z'
-                    ownerId: string
-                    name: Iris Dataset
-                    description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. (See Duda & Hart, for example.) The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are NOT linearly separable from each other.'
-                    shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
-                    location:
-                      type: url
-                      parameters:
-                        - key: permissions
-                          value: read$list
-                    format: csv
-                    namespace: flowerproject
+              examples: {}
         '404':
           description: Not Found
       operationId: getAsset
       tags:
         - Asset
-      description: Get asset by ID.
+      description: |-
+        Returns the asset which ID corresponds to the ID provided.
+
+        If the asset is not public, it requires authentication, and correct access rights to be able to retrieve the asset.
     delete:
       summary: Delete asset by ID
       operationId: deleteAsset
       responses:
         '204':
-          description: Asset was deleted successfully.
+          description: No Content
         '404':
           description: Not Found
-      description: Delete asset.
+      description: |-
+        Delete the asset which ID corresponds to the ID provided.
+
+        Requires authentication and correct access rights to perform the deletion.
+
+        A response with status code of `204` with empty resonse body indicates that the deletion was successful.
       tags:
         - Asset
       security:
@@ -165,7 +134,7 @@ paths:
       operationId: patchAsset
       responses:
         '204':
-          description: Changes were made successfully.
+          description: No Content
         '404':
           description: Not Found
         '422':
@@ -174,7 +143,17 @@ paths:
             application/json:
               schema:
                 $ref: ./definitions/ErrorResponse.yaml
-      description: Update only the given attributes of the asset. The attributes which are not specified in the body will not change.
+      description: |-
+        Update the asset which ID corresponds to the ID provided.
+
+        Only the attributes specified in the HTTP body will be modified. The attributes which are not specified will **not** change.
+
+        Requires authentication and correct access rights to be able to update the asset.
+
+        Possible response codes:
+         - `204`: The update was successful.
+         - `404`: There is no asset found with the provided ID.
+         - `422`: The object provided in the request body is malformed. A detailed explanation can be found in the response body. The asset will not be updated.
       requestBody:
         content:
           application/json:
@@ -184,7 +163,7 @@ paths:
               example-1:
                 value:
                   description: Updated description.
-        description: Specify only the attributes which you want to update.
+        description: ''
       tags:
         - Asset
       security:
@@ -203,7 +182,7 @@ paths:
         name: assetId
         in: path
         required: true
-        description: The unique identifier of the asset.
+        description: The ID of the asset.
     delete:
       summary: Delete tag from asset
       operationId: deleteTag
@@ -212,7 +191,11 @@ paths:
           description: No Content
         '404':
           description: Not Found
-      description: Delete the specified tag from the asset.
+      description: |-
+        Deletes the tag from the asset which ID corresponds to the ID provided.
+
+        A status code of `204` with an empty body indicates that the operation was successful.
+        If the tag was not present in the first place, a status code of `204` will be returned.
       tags:
         - Asset
       security:
@@ -225,7 +208,11 @@ paths:
           description: No Content
         '404':
           description: Not Found
-      description: 'Adds the tag to the given asset. If the tag is already present, it will remain the same, and `200` status will be returned.'
+      description: |-
+        Adds the tag to the asset which ID corresponds to the ID provided.
+
+        A status code of `204` with an empty body indicates that the operation was successful.
+        If the tag is already present, it will not be added again, and a status code of `204` will be returned.
       tags:
         - Asset
       security:
@@ -239,7 +226,7 @@ paths:
         required: true
         description: The keyword to search by. It searches in the name of the asset.
     get:
-      summary: Search assets
+      summary: Search assets by keyword
       tags:
         - Asset
       responses:
@@ -254,7 +241,14 @@ paths:
               examples: {}
       operationId: searchAssets
       description: |
-        List the assets which match the given keyword and optional query parameters.
+        List the assets which names contain the given keyword and other search criteria:
+         - if the ownerId is defined, only assets which are owned by the user with the specified ID are returned. 
+         - if tags are defined, only assets which contain at least one of the specified tags will be returned.
+         
+         Authentication:
+
+        - if no authentication is present, only public assets will be returned.
+        - if authentication is provided, public assets, and private assets that the authenticated user has access rights to, will be returned. 
       parameters:
         - schema:
             type: array
@@ -270,59 +264,12 @@ paths:
           style: form
         - schema:
             type: string
-            example: flowerproject
-          in: query
-          name: namespace
-          description: Filter by namespace.
-        - schema:
-            type: string
           in: query
           name: owner
           description: Filter by owner.
-  /assets/favorites:
-    get:
-      summary: List favorite assets
-      tags:
-        - Asset
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./definitions/AssetResponse.yaml
-      operationId: getFavoriteAssets
-      description: Lists the favorite assets of the currently logged in user.
-      security:
-        - JWT: []
-  '/assets/favorites/{assetId}':
-    parameters:
-      - schema:
-          type: string
-        name: assetId
-        in: path
-        required: true
-        description: The id of the asset to add to the favorites.
-    post:
-      summary: Add asset to favorites
-      operationId: addFavoriteAsset
-      responses:
-        '204':
-          description: No Content
-        '404':
-          description: Not Found
-      description: |-
-        Adds the asset to the currently logged in user's favorites.
-        Responds with `404` if the asset is not found.
-      security:
-        - JWT: []
-      tags:
-        - Asset
   /user/assets:
     get:
-      summary: Your GET endpoint
+      summary: Get assets owned by the authenticated user
       tags:
         - Asset
       responses:
@@ -335,14 +282,17 @@ paths:
                 items:
                   $ref: ./definitions/AssetResponse.yaml
       operationId: getUserAssets
-      description: 'Returns a list of assets which is owned by the logged in user, or is a member of the asset.'
+      description: |-
+        Lists all the assets owned by the authenticated user.
+
+        Requires authentication to be able to perform the request.
 components:
   securitySchemes:
     JWT:
       type: http
       scheme: bearer
-      bearerFormat: JWT
-      description: Authentication is made by the JWT token sent in the Authorizationheader of the request.
+      bearerFormat: Bearer <token>
+      description: Authentication is made by the JWT token sent in the Authorization header of the request.
 tags:
   - name: Asset
 security:

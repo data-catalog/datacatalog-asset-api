@@ -1,6 +1,6 @@
 title: LocationCreationRequest
 type: object
-description: The location where the asset data can be found.
+description: ''
 x-examples: {}
 properties:
   type:

@@ -1,11 +1,11 @@
 title: ErrorResponse
 type: object
-description: 'Response model sent by the server when an error occured. '
+description: ''
 properties:
   timestamp:
     type: string
     format: date-time
-    description: The time of the error response being sent.
+    description: The time of the error.
   status:
     type: integer
     description: The status code of the response.
