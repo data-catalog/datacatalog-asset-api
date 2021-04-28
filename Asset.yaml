@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
-  title: Data Catalog Asset Service
+  title: Data Catalog Asset Service API
   version: '1.0'
   description: |-
     The asset handling service of the Data Catalog application.
 
     Provides API endpoints to create, delete, and modify assets. It also manages the access rights to the assets, as private assets are only available to users that are members of it.
   contact:
-    name: Tumó Szilárd Zsolt
+    name: Szilárd Tumó
     email: szilard.tumo@stud.ubbcluj.ro
 servers:
   - url: 'https://assethandlingservice.azurewebsites.net'
