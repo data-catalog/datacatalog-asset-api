@@ -295,5 +295,6 @@ components:
       description: Authentication is made by the JWT token sent in the Authorization header of the request.
 tags:
   - name: Asset
+    x-displayName: Asset Management
 security:
   - JWT: []
