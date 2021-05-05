@@ -81,8 +81,6 @@ paths:
         description: The asset to be created.
       tags:
         - Asset
-      security:
-        - JWT: []
     parameters: []
   '/assets/{assetId}':
     parameters:
@@ -127,8 +125,6 @@ paths:
         A response with status code of `204` with empty resonse body indicates that the deletion was successful.
       tags:
         - Asset
-      security:
-        - JWT: []
     patch:
       summary: Update asset by ID
       operationId: patchAsset
@@ -166,8 +162,6 @@ paths:
         description: ''
       tags:
         - Asset
-      security:
-        - JWT: []
   '/assets/{assetId}/tags/{tag}':
     parameters:
       - schema:
@@ -198,8 +192,6 @@ paths:
         If the tag was not present in the first place, a status code of `204` will be returned.
       tags:
         - Asset
-      security:
-        - JWT: []
     post:
       summary: Add tag to asset
       operationId: addTag
@@ -215,8 +207,6 @@ paths:
         If the tag is already present, it will not be added again, and a status code of `204` will be returned.
       tags:
         - Asset
-      security:
-        - JWT: []
   '/assets/search/{keyword}':
     parameters:
       - schema:
@@ -293,8 +283,14 @@ components:
       scheme: bearer
       bearerFormat: Bearer <token>
       description: Authentication is made by the JWT token sent in the Authorization header of the request.
+    API Key:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: 'Authentication is made by the API key sent in the Authorization header of the request, in the following format: `Bearer <api_key>`.'
 tags:
   - name: Asset
     x-displayName: Asset Management
 security:
   - JWT: []
+  - API Key: []
