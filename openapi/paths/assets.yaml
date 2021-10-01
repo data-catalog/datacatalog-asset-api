@@ -3,14 +3,14 @@ get:
   tags:
     - Asset
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: ./definitions/AssetResponse.yaml
+              $ref: ../components/schemas/AssetResponse.yaml
           examples: {}
   operationId: getAssets
   description: >-
@@ -26,15 +26,15 @@ post:
   summary: Create an asset
   operationId: createAsset
   responses:
-    '201':
+    "201":
       description: Created
-    '422':
+    "422":
       description: Unprocessable Entity
       headers: {}
       content:
         application/json:
           schema:
-            $ref: ./definitions/ErrorResponse.yaml
+            $ref: ../components/schemas/ErrorResponse.yaml
   description: >-
     Create an asset. The user must be authenticated to be able to create an
     asset.
@@ -51,7 +51,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ./definitions/AssetCreationRequest.yaml
+          $ref: ../components/schemas/AssetCreationRequest.yaml
         examples:
           example-1:
             value:
@@ -75,7 +75,6 @@ post:
               tags:
                 - multivariate
               format: csv
-              namespace: flowerproject
               isPublic: true
     description: The asset to be created.
   tags:

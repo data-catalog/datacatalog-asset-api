@@ -8,14 +8,14 @@ parameters:
 get:
   summary: Get asset by ID
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
-            $ref: ./definitions/AssetResponse.yaml
+            $ref: ../components/schemas/AssetResponse.yaml
           examples: {}
-    '404':
+    "404":
       description: Not Found
   operationId: getAsset
   tags:
@@ -30,9 +30,9 @@ delete:
   summary: Delete asset by ID
   operationId: deleteAsset
   responses:
-    '204':
+    "204":
       description: No Content
-    '404':
+    "404":
       description: Not Found
   description: >-
     Delete the asset which ID corresponds to the ID provided.
@@ -49,16 +49,16 @@ patch:
   summary: Update asset by ID
   operationId: patchAsset
   responses:
-    '204':
+    "204":
       description: No Content
-    '404':
+    "404":
       description: Not Found
-    '422':
+    "422":
       description: Unprocessable Entity
       content:
         application/json:
           schema:
-            $ref: ./definitions/ErrorResponse.yaml
+            $ref: ../components/schemas/ErrorResponse.yaml
   description: >-
     Update the asset which ID corresponds to the ID provided.
 
@@ -79,11 +79,11 @@ patch:
     content:
       application/json:
         schema:
-          $ref: ./definitions/AssetUpdateRequest.yaml
+          $ref: ../components/schemas/AssetUpdateRequest.yaml
         examples:
           example-1:
             value:
               description: Updated description.
-    description: ''
+    description: ""
   tags:
     - Asset

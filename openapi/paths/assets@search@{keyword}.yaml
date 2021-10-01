@@ -10,14 +10,14 @@ get:
   tags:
     - Asset
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: ./definitions/AssetResponse.yaml
+              $ref: ../components/schemas/AssetResponse.yaml
           examples: {}
   operationId: searchAssets
   description: >
@@ -31,7 +31,7 @@ get:
     - if no authentication is present, only public assets will be returned.
 
     - if authentication is provided, public assets, and private assets that the
-    authenticated user has access rights to, will be returned. 
+    authenticated user has access rights to, will be returned.
   parameters:
     - schema:
         type: array

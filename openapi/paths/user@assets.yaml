@@ -3,14 +3,14 @@ get:
   tags:
     - Asset
   responses:
-    '200':
+    "200":
       description: OK
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: ./definitions/AssetResponse.yaml
+              $ref: ../components/schemas/AssetResponse.yaml
   operationId: getUserAssets
   description: |-
     Lists all the assets owned by the authenticated user.

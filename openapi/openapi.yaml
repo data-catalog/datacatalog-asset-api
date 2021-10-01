@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Data Catalog Asset Service API
-  version: '1.0'
+  version: "1.0"
   description: >-
     The asset handling service of the Data Catalog application.
 
@@ -12,16 +12,19 @@ info:
   contact:
     name: Szilárd Tumó
     email: szilard.tumo@stud.ubbcluj.ro
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/data-catalog/datacatalog-asset-api/master/LICENSE
 servers:
-  - url: 'https://assethandlingservice.azurewebsites.net'
+  - url: "https://assethandlingservice.azurewebsites.net"
 paths:
   /assets:
     $ref: paths\assets.yaml
-  '/assets/{assetId}':
+  "/assets/{assetId}":
     $ref: 'paths\assets@{assetId}.yaml'
-  '/assets/{assetId}/tags/{tag}':
+  "/assets/{assetId}/tags/{tag}":
     $ref: 'paths\assets@{assetId}@tags@{tag}.yaml'
-  '/assets/search/{keyword}':
+  "/assets/search/{keyword}":
     $ref: 'paths\assets@search@{keyword}.yaml'
   /user/assets:
     $ref: paths\user@assets.yaml
@@ -44,6 +47,7 @@ components:
 tags:
   - name: Asset
     x-displayName: Asset Management
+    description: Manage assets.
 security:
   - JWT: []
   - ApiKey: []
