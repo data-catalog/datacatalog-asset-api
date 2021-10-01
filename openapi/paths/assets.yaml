@@ -1,0 +1,83 @@
+get:
+  summary: Get all assets
+  tags:
+    - Asset
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./definitions/AssetResponse.yaml
+          examples: {}
+  operationId: getAssets
+  description: >-
+    Lists all the assets available to the authenticated user:
+
+
+    - if no authentication is present, only public assets will be returned.
+
+    - if authentication is provided, public assets, and private assets that the
+    authenticated user has access rights to, will be returned.
+  parameters: []
+post:
+  summary: Create an asset
+  operationId: createAsset
+  responses:
+    '201':
+      description: Created
+    '422':
+      description: Unprocessable Entity
+      headers: {}
+      content:
+        application/json:
+          schema:
+            $ref: ./definitions/ErrorResponse.yaml
+  description: >-
+    Create an asset. The user must be authenticated to be able to create an
+    asset.
+
+
+    Curently supported source locations are: 
+     - URL
+     - Azure Blob Storage.
+     
+     Currently supported data formats are:
+     - JSON
+     - CSV
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions/AssetCreationRequest.yaml
+        examples:
+          example-1:
+            value:
+              name: Iris Dataset
+              description: >-
+                This is perhaps the best known database to be found in the
+                pattern recognition literature. Fisher's paper is a classic in
+                the field and is referenced frequently to this day. (See Duda &
+                Hart, for example.) The data set contains 3 classes of 50
+                instances each, where each class refers to a type of iris plant.
+                One class is linearly separable from the other 2; the latter are
+                NOT linearly separable from each other.
+              shortDescription: >-
+                This is perhaps the best known database to be found in the
+                pattern recognition literature.
+              location:
+                type: url
+                parameters:
+                  - key: permissions
+                    value: read$list
+              tags:
+                - multivariate
+              format: csv
+              namespace: flowerproject
+              isPublic: true
+    description: The asset to be created.
+  tags:
+    - Asset
+parameters: []

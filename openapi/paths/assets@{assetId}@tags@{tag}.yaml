@@ -1,0 +1,52 @@
+parameters:
+  - schema:
+      type: string
+      minLength: 1
+    name: tag
+    in: path
+    required: true
+    description: The name of the tag.
+  - schema:
+      type: string
+    name: assetId
+    in: path
+    required: true
+    description: The ID of the asset.
+delete:
+  summary: Delete tag from asset
+  operationId: deleteTag
+  responses:
+    '204':
+      description: No Content
+    '404':
+      description: Not Found
+  description: >-
+    Deletes the tag from the asset which ID corresponds to the ID provided.
+
+
+    A status code of `204` with an empty body indicates that the operation was
+    successful.
+
+    If the tag was not present in the first place, a status code of `204` will
+    be returned.
+  tags:
+    - Asset
+post:
+  summary: Add tag to asset
+  operationId: addTag
+  responses:
+    '204':
+      description: No Content
+    '404':
+      description: Not Found
+  description: >-
+    Adds the tag to the asset which ID corresponds to the ID provided.
+
+
+    A status code of `204` with an empty body indicates that the operation was
+    successful.
+
+    If the tag is already present, it will not be added again, and a status code
+    of `204` will be returned.
+  tags:
+    - Asset

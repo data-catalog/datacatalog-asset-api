@@ -1,0 +1,18 @@
+get:
+  summary: Get assets owned by the authenticated user
+  tags:
+    - Asset
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ./definitions/AssetResponse.yaml
+  operationId: getUserAssets
+  description: |-
+    Lists all the assets owned by the authenticated user.
+
+    Requires authentication to be able to perform the request.

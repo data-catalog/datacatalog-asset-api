@@ -1,0 +1,89 @@
+parameters:
+  - schema:
+      type: string
+    name: assetId
+    in: path
+    description: The ID of the asset.
+    required: true
+get:
+  summary: Get asset by ID
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ./definitions/AssetResponse.yaml
+          examples: {}
+    '404':
+      description: Not Found
+  operationId: getAsset
+  tags:
+    - Asset
+  description: >-
+    Returns the asset which ID corresponds to the ID provided.
+
+
+    If the asset is not public, it requires authentication, and correct access
+    rights to be able to retrieve the asset.
+delete:
+  summary: Delete asset by ID
+  operationId: deleteAsset
+  responses:
+    '204':
+      description: No Content
+    '404':
+      description: Not Found
+  description: >-
+    Delete the asset which ID corresponds to the ID provided.
+
+
+    Requires authentication and correct access rights to perform the deletion.
+
+
+    A response with status code of `204` with empty resonse body indicates that
+    the deletion was successful.
+  tags:
+    - Asset
+patch:
+  summary: Update asset by ID
+  operationId: patchAsset
+  responses:
+    '204':
+      description: No Content
+    '404':
+      description: Not Found
+    '422':
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: ./definitions/ErrorResponse.yaml
+  description: >-
+    Update the asset which ID corresponds to the ID provided.
+
+
+    Only the attributes specified in the HTTP body will be modified. The
+    attributes which are not specified will **not** change.
+
+
+    Requires authentication and correct access rights to be able to update the
+    asset.
+
+
+    Possible response codes:
+     - `204`: The update was successful.
+     - `404`: There is no asset found with the provided ID.
+     - `422`: The object provided in the request body is malformed. A detailed explanation can be found in the response body. The asset will not be updated.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ./definitions/AssetUpdateRequest.yaml
+        examples:
+          example-1:
+            value:
+              description: Updated description.
+    description: ''
+  tags:
+    - Asset
