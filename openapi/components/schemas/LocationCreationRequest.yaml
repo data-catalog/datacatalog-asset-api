@@ -1,6 +1,7 @@
-title: Location
+title: LocationCreationRequest
 type: object
-description: The location where the asset data can be found.
+description: ''
+x-examples: {}
 properties:
   type:
     type: string
@@ -9,5 +10,7 @@ properties:
   parameters:
     type: array
     items:
-      $ref: ./Parameter.yaml
-x-examples: {}
+      $ref: ./ParameterDto.yaml
+required:
+  - type
+  - parameters

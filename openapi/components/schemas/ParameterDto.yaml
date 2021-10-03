@@ -5,6 +5,12 @@ properties:
   key:
     type: string
     description: The key of the parameter.
+    example: permissions
+    maxLength: 256
   value:
     type: string
     description: The value of the parameter
+    example: read$list
+required:
+  - key
+  - value

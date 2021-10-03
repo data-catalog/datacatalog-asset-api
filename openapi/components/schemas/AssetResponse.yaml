@@ -1,0 +1,74 @@
+title: AssetResponse
+description: ''
+x-examples:
+  Example response:
+    id: 6085b0d0c94921e9f9c9e7fc
+    createdAt: '2019-08-24T14:15:22Z'
+    updatedAt: '2019-08-24T14:15:22Z'
+    ownerId: 6085b0dec79cdfe443c8f71d
+    name: Iris Dataset
+    description: 'This is perhaps the best known database to be found in the pattern recognition literature. Fisher''s paper is a classic in the field and is referenced frequently to this day. <i>(See Duda & Hart, for example.)</i> The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. One class is linearly separable from the other 2; the latter are <strong>NOT</strong> linearly separable from each other.'
+    shortDescription: This is perhaps the best known database to be found in the pattern recognition literature.
+    location:
+      type: url
+      parameters:
+        - key: url
+          value: 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+    tags:
+      - multivariate
+    format: csv
+    isPublic: true
+    members: []
+type: object
+properties:
+  id:
+    type: string
+    description: The ID of the asset.
+  createdAt:
+    type: string
+    description: Date of creation.
+    format: date-time
+  updatedAt:
+    type: string
+    format: date-time
+    description: Date of the last update.
+  ownerId:
+    type: string
+    description: The ID of the user who owns the asset.
+  name:
+    type: string
+    description: A name of the asset.
+    minLength: 3
+    maxLength: 120
+  description:
+    type: string
+    description: A longer description about the content of the asset. Supports rich text formatting.
+    minLength: 3
+  shortDescription:
+    type: string
+    example: This is perhaps the best known database to be found in the pattern recognition literature.
+    maxLength: 300
+    description: Short description breifly defining the contents of the asset.
+  location:
+    $ref: ./LocationResponse.yaml
+  tags:
+    type: array
+    uniqueItems: true
+    description: A list of keywords assigned to the asset.
+    items:
+      type: string
+  format:
+    type: string
+    enum:
+      - csv
+      - json
+    description: The file format of the asset.
+  isPublic:
+    type: boolean
+    description: Whether the asset is accessible by anyone or not.
+  members:
+    type: array
+    description: The IDs of the users which the asset is accessible for.
+    uniqueItems: true
+    items:
+      type: string

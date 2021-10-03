@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Data Catalog Asset Service API
+  version: "1.0"
+  description: >-
+    The asset handling service of the Data Catalog application.
+
+
+    Provides API endpoints to create, delete, and modify assets. It also manages
+    the access rights to the assets, as private assets are only available to
+    users that are members of it.
+  contact:
+    name: Szilárd Tumó
+    email: szilard.tumo@stud.ubbcluj.ro
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/data-catalog/datacatalog-asset-api/master/LICENSE
+servers:
+  - url: "https://assethandlingservice.azurewebsites.net"
+paths:
+  /assets:
+    $ref: paths\assets.yaml
+  "/assets/{assetId}":
+    $ref: 'paths\assets@{assetId}.yaml'
+  "/assets/{assetId}/tags/{tag}":
+    $ref: 'paths\assets@{assetId}@tags@{tag}.yaml'
+  "/assets/search/{keyword}":
+    $ref: 'paths\assets@search@{keyword}.yaml'
+  /user/assets:
+    $ref: paths\user@assets.yaml
+components:
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer <token>
+      description: >-
+        Authentication is made by the JWT token sent in the Authorization header
+        of the request.
+    ApiKey:
+      name: Authorization
+      type: apiKey
+      in: header
+      description: >-
+        Authentication is made by the API key sent in the Authorization header
+        of the request, in the following format: `Bearer <api_key>`.
+tags:
+  - name: Asset
+    x-displayName: Asset Management
+    description: Manage assets.
+security:
+  - JWT: []
+  - ApiKey: []

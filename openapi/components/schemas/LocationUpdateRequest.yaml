@@ -1,0 +1,13 @@
+title: LocationUpdateRequest
+type: object
+description: ''
+x-examples: {}
+properties:
+  type:
+    type: string
+    description: The location type.
+    example: url
+  parameters:
+    type: array
+    items:
+      $ref: ./ParameterDto.yaml

@@ -1,0 +1,52 @@
+parameters:
+  - schema:
+      type: string
+    name: keyword
+    in: path
+    required: true
+    description: The keyword to search by. It searches in the name of the asset.
+get:
+  summary: Search assets by keyword
+  tags:
+    - Asset
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/AssetResponse.yaml
+          examples: {}
+  operationId: searchAssets
+  description: >
+    List the assets which names contain the given keyword and other search
+    criteria:
+     - if the ownerId is defined, only assets which are owned by the user with the specified ID are returned. 
+     - if tags are defined, only assets which contain at least one of the specified tags will be returned.
+     
+     Authentication:
+
+    - if no authentication is present, only public assets will be returned.
+
+    - if authentication is provided, public assets, and private assets that the
+    authenticated user has access rights to, will be returned.
+  parameters:
+    - schema:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+        example:
+          - multivariate
+          - real
+      in: query
+      description: Filter by tags.
+      name: tags
+      style: form
+    - schema:
+        type: string
+      in: query
+      name: owner
+      description: Filter by owner.
